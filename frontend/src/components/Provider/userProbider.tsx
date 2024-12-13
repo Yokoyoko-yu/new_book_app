@@ -29,10 +29,19 @@ export const UserProvider=({children}:userProviderProps)=>{
         })
         if (response.ok){
           const data=await response.json();
-        //   console.log(data.user_name.name)
-        console.log(`データ：${data.user.id}`)
+          console.log(data)
+          console.log(data.user_name)
+        //ログインしているかしていないかで分岐
+        if (data.user_name&&data.user_name!=='null'){
+          console.log(data.user_name.type)
+          console.log('これからデータ')
+          console.log(`データ：${data.user.id}`)
           setUser(data.user);
-          console.log('成功')
+          console.log(`成功:${JSON.stringify(data.user)}`)
+        }else{
+          console.log('ログインしていません')
+        }
+
         }else{
           setUser("");
           console.log('失敗')

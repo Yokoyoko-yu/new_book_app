@@ -22,6 +22,7 @@ export const BasicButtons=(props)=> {
       Setimagesrc(`https://ndlsearch.ndl.go.jp/thumbnail/${isbn}.jpg`)
       SetimgState(true)
     }catch(err){
+      console.log(`エラー内容：${err}`)
       alert('書籍の検索に失敗しました')
       SetimgState(false)
     }
@@ -59,9 +60,6 @@ export const BasicButtons=(props)=> {
       headers: {
         'Content-Type': 'application/json',  // JSON形式で送信することを指定
       },
-      // body:{
-      //   mybooks:JSON.stringify(bookinfo)
-      // }
       body:JSON.stringify({
         my_book:bookinfo
       })
