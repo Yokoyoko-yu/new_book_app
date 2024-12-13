@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ShelfApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+  <% if logged_in? %>
+  <%= render 'layouts/logged_in_menu' %>
+  <%end%>
+    <%= yield %>
+      <%= debug(params) if Rails.env.development? %>
+
+   
+
+  </body>
+</html>

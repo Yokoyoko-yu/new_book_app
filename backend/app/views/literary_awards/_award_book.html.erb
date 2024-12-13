@@ -1,0 +1,37 @@
+<div class='award_book'>
+    <div class='number'>
+    <li>受賞回</li>
+    <li><%=book.times%>回</li>
+    </div>
+    <ul>
+        <div class='award'>
+        <li>受賞作品</li>
+        <li><%=book.title%></li>
+        </div>
+        <div class='author'>
+        <li>著者</li>
+        <li><%=book.author%></li>
+        </div>
+    </ul>
+    <ul class='book_state'>
+    <%if my_book=MyBook.find_by(title:book.title,user_id:current_user)%>
+        <%if my_book.read==1%>
+            <button id="btn" disabled>読了済</button>
+        <%else%>
+            <%=button_to "読了",read_book_path(book,current_page_id:params[:id]),method: :get,id:"btn"%>
+            <%# <button><%#= link_to "読了",read_book_path(book,current_page_id:params[:id])></button> %>
+        <%end%>
+        <%if my_book.have==1%>
+            <button id="btn" disabled>所持済</button>
+        <%else%>
+            <%=button_to "所持",have_book_path(book,current_page_id:params[:id]),method: :get,id:"btn"%>
+            <%# <button class="yet"><%= link_to '所持している',have_book_path(book,current_page_id:params[:id]) ></button> %>
+        <%end%>
+    <%else%>
+        <%# <button class="yet">= link_to "読了",read_book_path(book,current_page_id:params[:id])</button> %>
+        <%=button_to "読了",read_book_path(book,current_page_id:params[:id]),method: :get,id:"btn"%>
+        <%# <button class="yet"><%= link_to '所持している',have_book_path(book,current_page_id:params[:id]) ></button> %>
+        <%= button_to "所持",have_book_path(book,current_page_id:params[:id]),method: :get,id:"btn"%>
+    <%end%>
+    </ul>
+</div>

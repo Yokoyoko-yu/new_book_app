@@ -1,0 +1,109 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ body {
+    background-color: #f5deb3;
+    color: #696969; /* テキストの色を白に設定する場合 */
+    margin: 0;
+
+  }
+  .award_book{
+    padding: 10px 20%;
+  }
+
+  /* .award_book ul{
+    display: flex;
+  } */
+  
+  .award_book li{
+    list-style: none;
+  }
+
+.award,.author,.number{
+  display: flex;
+}
+
+.award li,.author li,.number li{
+  margin-right: 5px;
+}
+
+.already li,.yet li{
+  list-style: none;
+}
+
+header{
+  background-color: #deb887;
+  width:100%;
+  height:45px;
+}
+
+header ul{
+  display: flex;
+  list-style: none;
+  height: 30px;
+  margin: 0;
+  height: 100%;
+  padding-left: 60%;
+}
+
+header li{
+  padding: 10px 5px;
+}
+
+.button a{
+  margin: 0 5px;
+}
+
+.already,.yet{
+  margin-left: 50px;
+}
+.already ul,.yet ul{
+  padding-left: 70px;
+}
+
+.have_awards,.read_awards{
+  display: flex;
+}
+.have_awards li,.read_awards li{
+  padding-left: 10px;
+  list-style: none;
+}
+
+.book_state{
+  display: flex;
+}
+
+.book_state p,.book_state a{
+  padding-left: 5px;
+}
+.book_state a{
+  margin-top: 15px;
+}
+
+
+
+button{
+  width: 60px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: white;
+  color: orange;
+}
+
+button:disabled{
+  color: white;
+  background-color: gray;
+}

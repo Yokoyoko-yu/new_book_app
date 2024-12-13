@@ -1,0 +1,25 @@
+<h1>Book shelf</h1>
+    <% if @my_books.any? %>
+    <div class='already'>
+    <p>所持している本リスト</p>
+    <%@my_books_read.each do |read_book|%>
+    <ul class='button'>
+    
+        <li><%= read_book.title %>       <%= read_book.author %><%=link_to '削除する',my_book_path(read_book),data: { "turbo-method": :delete }%></li>
+    </ul>
+    <%end%>
+    </div>
+    <div class='yet'>
+    <p>読み終わった本リスト</p>
+    <%@my_books_unread.each do |unread_book|%>
+    <ul class='button'>
+        <li><%= unread_book.title %>       <%= unread_book.author %><%=link_to '削除する',my_book_path(unread_book),data: { "turbo-method": :delete }%><%=link_to "読了",finish_my_book_path(unread_book),method: :post%></li>
+    </ul>
+    <%end%>
+    </div>
+
+    
+    <%end %>
+
+<%= link_to '本を追加する',new_my_book_path  %>
+
