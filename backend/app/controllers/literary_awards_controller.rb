@@ -2,6 +2,8 @@ class LiteraryAwardsController < ApplicationController
     #賞の一覧を見る
     def show    
         @awards=LiteraryAward.all
+        puts @awards
+        render json:{awards:@awards}
     end
 
     def check

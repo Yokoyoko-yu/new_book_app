@@ -30,10 +30,10 @@ export const UserProvider=({children}:userProviderProps)=>{
         if (response.ok){
           const data=await response.json();
           console.log(data)
-          console.log(data.user_name)
+          console.log(`user:${data.user}`)
         //ログインしているかしていないかで分岐
-        if (data.user_name&&data.user_name!=='null'){
-          console.log(data.user_name.type)
+        if (data.user&&data.user!=='null'){
+          console.log(data.user.type)
           console.log('これからデータ')
           console.log(`データ：${data.user.id}`)
           setUser(data.user);
