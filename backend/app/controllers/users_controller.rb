@@ -7,11 +7,13 @@ class UsersController < ApplicationController
         @user=User.new(user_resources)
         if @user.save
             log_in(@user)
-            redirect_to '/home'
+            redirect_to '/home',status:200
             puts "ユーザ作成成功"
+            puts @user
         else
             puts "ユーザの作成に失敗"
-            render 'new',stauts: :unprocessable_enitiy
+            puts @user.errors.full_messages
+            render 'new',status: :unprocessable_entity
         end
     end
 

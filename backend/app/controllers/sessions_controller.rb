@@ -1,22 +1,18 @@
 require 'jwt'
 class SessionsController < ApplicationController
-    def new
-    end
 
     def create
-        # Rails.logger(params[:session])
-        # puts params[:session][:email]
-        # Rails.logger.info(params[:session])
+        puts "params:#{params}"
         user=User.find_by(email: params[:session][:email].downcase)
         if user&&user.authenticate(params[:session][:password])
             reset_session
             puts "aka"
             log_in(user)
             puts "ao"
-            redirect_to '/home'
-            Rails.logger.info('ログイン成功です')
+            redirect_to '/home',status:200
+            puts ('ログイン成功です')
         else
-            Rails.logger.info('kkk')
+            Rails.logger.info('失敗です')
             render :new,status: :unprocessable_entity
         end
     end
@@ -24,6 +20,7 @@ class SessionsController < ApplicationController
     def destroy
         # session.delete(:user_id)
         log_out
+        render json: { message: 'ログアウト成功' }, status: 200
         # redirect_to root_path
     end
 
