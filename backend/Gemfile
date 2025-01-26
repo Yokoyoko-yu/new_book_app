@@ -23,6 +23,11 @@ gem 'prism'
 gem 'sqlite3', '~> 1.6.4'
 gem 'rack-cors' 
 
+gem 'ostruct'
+gem 'logger'
+gem 'bigdecimal'
+gem 'mutex_m'
+
 group :development, :test do
   gem 'rspec-rails', '~> 7.0.0'
   gem "debug",   "1.7.1", platforms: %i[ mri mingw x64_mingw ]
