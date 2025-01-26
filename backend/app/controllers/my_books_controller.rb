@@ -1,8 +1,8 @@
 class MyBooksController < ApplicationController
     include SessionsHelper
-    def new
-        @my_book=MyBook.new
-    end
+    # def new
+    #     @my_book=MyBook.new
+    # end
     def show
         @user=current_user
         # @user=User.find(params[:id])
@@ -17,8 +17,9 @@ class MyBooksController < ApplicationController
         @my_book =current_user.my_books.new(my_book_params)
         @my_book.read||=0
         if @my_book.save
-            puts('save')
+            puts("mybook:#{@my_book}")
             # redirect_to my_book_path(@current_user)
+            render json: { message: 'Book created successfully' }, status: :ok
         else
             render 'new',status: :unprocessable_entity
         end
@@ -44,7 +45,7 @@ class MyBooksController < ApplicationController
         @my_book=MyBook.find(params[:id])
         if @my_book
             @my_book.destroy
-            redirect_to my_book_path(current_user)
+            redirect_to my_book_path(current_user),status:200
         else
             redirect_to new_my_book_path,status: :unprocessable_entity
         end
