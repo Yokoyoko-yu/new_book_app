@@ -1,0 +1,7 @@
+FROM node:23.9.0
+RUN apt-get update && apt-get install
+COPY package.json package-lock.json ./
+RUN npm install
+WORKDIR /src
+COPY . .
+CMD [ "npm","start","-b","0.0.0.0","-p","3001" ]

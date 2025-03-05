@@ -20,7 +20,6 @@ export const MyBooks=()=>{
             console.log('書籍の取得に失敗')
         }
     }
-    console.log()
     return(
         <div>
             <h1>図書一覧</h1>

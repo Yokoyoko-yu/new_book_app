@@ -108,9 +108,12 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
         console.log('go')
         if (response.ok) {
             // ユーザー作成成功時の処理
+            // const data = await response.json();
             console.log('User created successfully');
+            console.log(`response: ${JSON.stringify(response)}`);
             window.location.href='http://localhost:3001/mybooks'
             // window.location.href='http://127.0.0.1:3000/mybooks'
+            
 
 
           } else {

@@ -1,0 +1,34 @@
+services:
+  backend:
+    ports:
+      - "3000:3000"
+    build:
+      ./backend
+
+  frontend:
+    ports:
+      - "3001:3000"
+    build: 
+      ./frontend
+
+  db:
+    environment:
+      - MYSQL_ROOT_PASSWORD=yokota
+      - MYSQL_DATABASE=shelf_app
+    ports:
+      - "3306:3306"
+    
+    volumes:
+      - type: volume
+        source: db-compose-volume
+        target: /var/lib/mysql
+
+    image: mysql:8.2.0
+        
+
+    
+
+volumes:
+  db-compose-volume:
+    
+

@@ -1,4 +1,4 @@
-require 'jwt'
+# require 'jwt'
 class SessionsController < ApplicationController
 
     def create
@@ -8,9 +8,13 @@ class SessionsController < ApplicationController
             reset_session
             puts "aka"
             log_in(user)
+            puts "レスポンス"
+            puts response
             puts "ao"
             redirect_to '/home',status:200
-            puts ('ログイン成功です')
+            Rails.logger.info('ログイン成功です')
+            # puts ('ログイン成功です')
+            # render json: { message: 'ログイン成功です', user: user }, status: :ok
         else
             Rails.logger.info('失敗です')
             render :new,status: :unprocessable_entity

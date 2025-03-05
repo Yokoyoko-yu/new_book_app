@@ -6,15 +6,18 @@ module SessionsHelper
             value:token,
             httponly:true,
             expires:1.weeks.from_now,
-            same_site: :none,
+            same_site: :None,
             secure: true
         }
+        # puts "クッキーの送信#{cookies[:auth_token]}"
         # cookies[:auth_token]=token
     end
 
     def generate_jwt_token(user_id)
         payload = { user_id: user_id, exp: (Time.now + 1.week).to_i }
         JWT.encode(payload, Rails.application.secrets.secret_key_base)
+        # puts "生成されたトークン: #{token}"
+        # token
     end
 
     def logged_in?

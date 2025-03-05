@@ -8,6 +8,10 @@
 
 require 'csv'
 
+LiteraryAward.create!(id:1,name:'芥川賞',total:171)
+LiteraryAward.create!(id:2,name:'三島由紀夫賞',total:37)
+LiteraryAward.create!(id:3,name:'野間文芸新人賞',total:46)
+
 csv_file_path = Rails.root.join('db/akutagawa.csv')
 
 CSV.foreach(csv_file_path, headers: true) do |row|
