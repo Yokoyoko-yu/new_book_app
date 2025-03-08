@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import top100Films from '../top100Films';
 import { useEffect,useState } from "react";
+import ColumnMenuGrid from "../components/AwardTable";
 
 
 
@@ -45,7 +46,8 @@ export const Award=()=>{
                 sx={{ width: 300 }}
                 renderInput={(params) => <TextField {...params} label="Movie" />}/>
             
-           
+           {/* <h1>{awards}</h1> */}
+           <ColumnMenuGrid></ColumnMenuGrid>
         </div>
     )
 }
