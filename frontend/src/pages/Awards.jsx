@@ -39,15 +39,15 @@ export const Award=()=>{
     return(
         <div>
             {/* <ButtonAppBar/> */}
-            <h1>文学賞</h1>
+            <h1>文学賞の世界100</h1>
             <Autocomplete
                 disablePortal
                 options={selection}
                 sx={{ width: 300 }}
                 renderInput={(params) => <TextField {...params} label="Movie" />}/>
             
-           {/* <h1>{awards}</h1> */}
-           <ColumnMenuGrid></ColumnMenuGrid>
+          
+           {/* <AddNewColumnMenuGrid></AddNewColumnMenuGrid> */}
         </div>
     )
 }

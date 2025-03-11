@@ -9,6 +9,7 @@ services:
       - type: bind
         source: ./backend
         target: /app
+  
 
   frontend:
     ports:
@@ -18,10 +19,13 @@ services:
     environment:
       - HOST=0.0.0.0
       - PORT=3000
+      - CHOKIDAR_USEPOLLING=true
     volumes:
       - type: bind
         source: ./frontend
         target: /src
+
+    command: sh -c 'cd src && npm run winstart'
 
   db:
     environment:
