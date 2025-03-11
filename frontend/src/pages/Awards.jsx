@@ -39,7 +39,7 @@ export const Award=()=>{
     return(
         <div>
             {/* <ButtonAppBar/> */}
-            <h1>文学賞の世界100</h1>
+            <h1>文学賞の世界</h1>
             <Autocomplete
                 disablePortal
                 options={selection}
