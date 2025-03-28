@@ -11,30 +11,30 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2024_11_15_071459) do
-  create_table "award_books", force: :cascade do |t|
+  create_table "award_books", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "times"
     t.string "title"
     t.string "author"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "literary_award_id", null: false
+    t.bigint "literary_award_id", null: false
     t.integer "kasaku", default: 0
     t.index ["literary_award_id"], name: "index_award_books_on_literary_award_id"
   end
 
-  create_table "literary_awards", force: :cascade do |t|
+  create_table "literary_awards", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.integer "total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "my_books", force: :cascade do |t|
+  create_table "my_books", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.string "author"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.integer "read"
     t.integer "have", default: 0
     t.string "isbn"
@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_15_071459) do
     t.index ["user_id"], name: "index_my_books_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.datetime "created_at", null: false

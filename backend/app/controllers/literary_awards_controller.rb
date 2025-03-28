@@ -24,7 +24,7 @@ class LiteraryAwardsController < ApplicationController
             end
         end
       
-
+        render json:{books:@award_books}
         # @read_awards=ActiveRecord::Base.connection.execute("select * from MyBook where MyBook")
         # @have_awards=MyBook.joins(:award_book).select("my_books.*").where(user_id: current_user.id, read: 0).where("my_books.title = award_books.title")
     end

@@ -5,13 +5,15 @@ import Autocomplete from '@mui/material/Autocomplete';
 import top100Films from '../top100Films';
 import { useEffect,useState } from "react";
 import ColumnMenuGrid from "../components/AwardTable";
-
-
+import {AddNewColumnMenuGrid} from "../components/AwardTable";
 
 
 export const Award=()=>{
     const [awards,setAwards]=useState([]);
-    useEffect(()=>{getLiterary_awared()},[])
+    const [prize,setPrize]=useState(null);
+    const [awardsData,setAwardsData]=useState([]);
+    useEffect(()=>{getLiterary_awared()},[]);
+    useEffect(()=>{getAwardList()},[prize]);
 
     const getLiterary_awared=async()=>{
         const response=await fetch('http://127.0.0.1:3000/awards',{
@@ -31,23 +33,45 @@ export const Award=()=>{
         }
     }
 
-    const selection=awards.map(award=>({label:award.name}))
+    const selection=awards.map(award=>({label:award.name,id:award.id}))
 
+    const handleAwardChange = (event, newValue) => {
+        console.log("Selected prize:", newValue.id);  // デバッグ用
+        if (newValue) {
+            setPrize(newValue);
+            console.log('セット成功')
+        }
+        console.log("賞のid:",prize)
+    };
+
+
+    const getAwardList=async()=>{
+        const response=await fetch(`http://127.0.0.1:3000/check?id=${prize.id}`,{
+            method:'Get',
+            credentials:'include'
+
+        })
+        console.log("表データ",response)
+        const data = await response.json();  // JSONデータを取得
+        setAwardsData(data.books);
+        console.log("表データ (JSON本体)", data.books);
+    }
     
     
 
     return(
         <div>
             {/* <ButtonAppBar/> */}
-            <h1>文学賞の世界</h1>
+            <h1>文学賞の世界100</h1>
             <Autocomplete
                 disablePortal
                 options={selection}
                 sx={{ width: 300 }}
-                renderInput={(params) => <TextField {...params} label="Movie" />}/>
+                onChange={handleAwardChange}
+                renderInput={(params) => <TextField {...params} label="prize" />}/>
+            <div>{JSON.stringify(prize)}</div>
             
-          
-           {/* <AddNewColumnMenuGrid></AddNewColumnMenuGrid> */}
+            <AddNewColumnMenuGrid data={awardsData}></AddNewColumnMenuGrid>
         </div>
     )
 }

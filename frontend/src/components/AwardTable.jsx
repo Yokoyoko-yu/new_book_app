@@ -5,7 +5,9 @@ import ListItemText from '@mui/material/ListItemText';
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import { DataGrid, GridColumnMenu } from '@mui/x-data-grid';
 import { useDemoData } from '@mui/x-data-grid-generator';
+import { useEffect,useState } from "react";
 
+// Custom menu item
 function CustomUserItem(props) {
   const { myCustomHandler, myCustomValue } = props;
   return (
@@ -18,37 +20,46 @@ function CustomUserItem(props) {
   );
 }
 
+// Custom column menu
 function CustomColumnMenu(props) {
   return (
     <GridColumnMenu
       {...props}
       slots={{
-        // Add new item
         columnMenuUserItem: CustomUserItem,
       }}
       slotProps={{
         columnMenuUserItem: {
-          // set `displayOrder` for new item
           displayOrder: 15,
-          // pass additional props
-          myCustomValue: 'Do custom action',
-          myCustomHandler: () => alert('Custom handler fired'),
+          myCustomValue: 'Perform Custom Action',  // Modify the custom action text
+          myCustomHandler: () => alert('Custom handler fired'),  // Custom handler
         },
       }}
     />
   );
 }
 
-export default function AddNewColumnMenuGrid() {
-  const { data } = useDemoData({
-    dataSet: 'Commodity',
-    rowLength: 20,
-    maxColumns: 5,
-  });
+export const AddNewColumnMenuGrid=(props)=>{
+  const [columns, setColumns] = React.useState([
+    // { field: 'id', headerName: 'ID', width: 90 },
+    { field: 'times', headerName: '回', width: 200 },
+    { field: 'title', headerName: 'タイトル', width: 300 },
+    { field: 'author', headerName: '著者', width: 200 },
+    {field:'status',headerName:'状態',width:200}
+  ]);
+
+  const [rows, setRows] = React.useState(props.data || []);
+  // const rows=props.data
+
+  useEffect(()=>{setRows(props.data || [])},[props.data])
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid {...data} slots={{ columnMenu: CustomColumnMenu }} />
+    <div style={{ height: 600, width: '100%' }}>
+      <DataGrid
+        columns={columns}  // Bind columns here
+        rows={rows}  // Bind rows here
+        slots={{ columnMenu: CustomColumnMenu }}  // Add custom column menu
+      />
     </div>
   );
 }
