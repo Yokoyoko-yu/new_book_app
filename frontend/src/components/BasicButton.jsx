@@ -74,12 +74,15 @@ export const BasicButtons=(props)=> {
     }
   }
   return (
-    <div>
-    <Stack spacing={2} direction="row">
+    <div style={{ textAlign: "center", marginTop: "16px" }}>
+    <Stack spacing={2} direction="row" justifyContent="center">
       <Button variant="contained" onClick={()=>{searchBook(value)}}>検索する</Button>
     </Stack>
+    <div style={{ marginTop: "30px" }}>
     {imagesrc && <img src={imagesrc} alt="Book Thumbnail" />}
-    {imgState&&<Button variant='contained' onClick={add_book}>登録する</Button>}
+
+    {imgState&&<Button variant='contained' onClick={add_book} style={{marginLeft:"20px"}}>登録する</Button>}
+    </div>
     </div>
   );
 }

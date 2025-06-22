@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-
+##これはwsl2上ファイルです
 require 'csv'
 
 LiteraryAward.create!(id:1,name:'芥川賞',total:171)

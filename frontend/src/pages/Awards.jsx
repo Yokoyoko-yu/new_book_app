@@ -36,7 +36,7 @@ export const Award=()=>{
     const selection=awards.map(award=>({label:award.name,id:award.id}))
 
     const handleAwardChange = (event, newValue) => {
-        console.log("Selected prize:", newValue.id);  // デバッグ用
+
         if (newValue) {
             setPrize(newValue);
             console.log('セット成功')
@@ -46,23 +46,35 @@ export const Award=()=>{
 
 
     const getAwardList=async()=>{
-        const response=await fetch(`http://127.0.0.1:3000/check?id=${prize.id}`,{
-            method:'Get',
-            credentials:'include'
-
-        })
-        console.log("表データ",response)
-        const data = await response.json();  // JSONデータを取得
-        setAwardsData(data.books);
-        console.log("表データ (JSON本体)", data.books);
-    }
+        if (!prize?.id) {
+            console.warn("prize.id が存在しないため、API リクエストをスキップします");
+            return;
+        }
+    
+       
+        try {
+            const response = await fetch(`http://127.0.0.1:3000/check?id=${prize.id}`, {
+                method: 'GET',
+                credentials: 'include'
+            });
+    
+            console.log("表データ", response);
+    
+            const data = await response.json();  // JSONデータを取得
+            setAwardsData(data.books);
+            console.log("表データ (JSON本体)", data.books);
+        } catch (error) {
+            console.error("データの取得に失敗しました:", error);
+        }
+    };
+    
     
     
 
     return(
         <div>
             {/* <ButtonAppBar/> */}
-            <h1>文学賞の世界100</h1>
+            <h1>文学賞の世界</h1>
             <Autocomplete
                 disablePortal
                 options={selection}

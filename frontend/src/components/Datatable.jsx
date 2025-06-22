@@ -23,12 +23,6 @@ const columns = [
   },
   { field: 'title', headerName: 'Title', width: 250 },
   { field: 'author', headerName: 'Author', width: 250 },
-  {
-    field: 'status',
-    headerName: 'Status',
-    type: 'number',
-    width: 130,
-  },
 ];
 
 const fetchBookImage =  async(isbn) => {

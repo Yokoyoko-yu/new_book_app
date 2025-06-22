@@ -12,19 +12,25 @@ export const Addbooks=()=>{
         setIsbn(event.target.value)
     }
     return(
-        <div>
+        <div >
             {/* <ButtonAppBar/> */}
             <h1>図書登録</h1>
-            <h2>ISBN:</h2>
+            {/* <h2>ISBN:</h2> */}
             <Box
                 component="form"
-                sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
+                sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        '& > :not(style)': { m: 1, width: '25ch' }
+    }}
                 noValidate
                 autoComplete="off"
                 >
-                <TextField id="outlined-basic" label="Outlined" variant="outlined" value={isbn} onChange={handleChange} />
+                <TextField id="outlined-basic" label="ISBN" variant="outlined" value={isbn} onChange={handleChange} />
             </Box>
-            <BasicButtons value={isbn} />
+            <BasicButtons value={isbn} style={{ display: "flex", justifyContent: "center", marginTop: "16px" }}/>
         </div>
     )
 }
