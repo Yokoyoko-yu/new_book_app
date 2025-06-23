@@ -1,0 +1,75 @@
+@startuml
+
+entity "awards" {
+  * award_id : int
+  --
+  name : string
+  total : int
+}
+
+entity "award_grants" {
+  * award_id : int
+  * award_title_id
+  --
+  times : id
+}
+
+entity "award_titles" {
+  * award_title_id : int
+  --
+  title : str
+  author : str
+}
+
+
+entity "award_book_contents" {
+    *isbn : int
+    *award_title_id : int
+    --
+
+}
+
+
+
+awards ||--o{ award_grants
+
+award_grants ||--|| award_titles
+
+award_titles ||--o{ award_book_contents
+
+
+
+
+' ユーザーのER図
+
+entity "users" {
+    *user_id : int
+    --
+    email : str
+}
+
+entity "user_books" {
+    *isbn : int 
+    *user_id:int
+    --
+    
+}
+
+entity "books"{
+    *isbn:int
+    --
+    author:str
+    title:str
+    publisher:str
+}
+
+users||---o{user_books
+
+user_books}o---||books
+
+award_book_contents}|--||books
+
+
+
+
+@enduml
