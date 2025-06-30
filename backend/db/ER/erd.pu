@@ -9,7 +9,7 @@ entity "awards" {
 
 entity "award_grants" {
   * award_id : int
-  * award_title_id
+  * award_title_id:int
   --
   times : id
 }
@@ -33,7 +33,7 @@ entity "award_book_contents" {
 
 awards ||--o{ award_grants
 
-award_grants ||--|| award_titles
+award_grants }|--|| award_titles
 
 award_titles ||--o{ award_book_contents
 
@@ -46,6 +46,8 @@ entity "users" {
     *user_id : int
     --
     email : str
+    name: str
+    password:str
 }
 
 entity "user_books" {

@@ -3,6 +3,7 @@ class MyBooksController < ApplicationController
     # def new
     #     @my_book=MyBook.new
     # end
+    #本の一覧
     def show
         @user=current_user
         # @user=User.find(params[:id])

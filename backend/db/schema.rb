@@ -10,49 +10,69 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_15_071459) do
-  create_table "award_books", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "times"
-    t.string "title"
-    t.string "author"
+ActiveRecord::Schema[7.0].define(version: 2025_06_23_123452) do
+  create_table "award_book_contents", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "isbn", null: false
+    t.bigint "award_title_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "literary_award_id", null: false
-    t.integer "kasaku", default: 0
-    t.index ["literary_award_id"], name: "index_award_books_on_literary_award_id"
+    t.index ["award_title_id"], name: "index_award_book_contents_on_award_title_id"
+    t.index ["isbn"], name: "fk_rails_7a42bacfcd"
   end
 
-  create_table "literary_awards", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
-    t.integer "total"
+  create_table "award_grants", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "award_id", null: false
+    t.bigint "award_title_id", null: false
+    t.integer "times", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["award_id"], name: "index_award_grants_on_award_id"
+    t.index ["award_title_id"], name: "index_award_grants_on_award_title_id"
+  end
+
+  create_table "award_titles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "author", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "my_books", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "title"
-    t.string "author"
+  create_table "awards", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "total", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "books", primary_key: "isbn", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "author", null: false
+    t.string "title", null: false
+    t.string "publisher", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_books", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.integer "read"
-    t.integer "have", default: 0
-    t.string "isbn"
-    t.string "image"
-    t.index ["title", "author"], name: "index_my_books_on_title_and_author"
-    t.index ["user_id", "created_at"], name: "index_my_books_on_user_id_and_created_at"
-    t.index ["user_id"], name: "index_my_books_on_user_id"
+    t.integer "isbn", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["isbn"], name: "fk_rails_29857ce198"
+    t.index ["user_id"], name: "index_user_books_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
+    t.string "email", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "password_digest"
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.string "password_digest", null: false
   end
 
-  add_foreign_key "award_books", "literary_awards"
-  add_foreign_key "my_books", "users"
+  add_foreign_key "award_book_contents", "award_titles"
+  add_foreign_key "award_book_contents", "books", column: "isbn", primary_key: "isbn"
+  add_foreign_key "award_grants", "award_titles"
+  add_foreign_key "award_grants", "awards"
+  add_foreign_key "user_books", "books", column: "isbn", primary_key: "isbn"
+  add_foreign_key "user_books", "users"
 end
