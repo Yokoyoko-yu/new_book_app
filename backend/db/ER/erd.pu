@@ -51,14 +51,15 @@ entity "users" {
 }
 
 entity "user_books" {
-    *isbn : int 
-    *user_id:int
+    *id: int
     --
+    isbn : str
+    user_id:int
     
 }
 
 entity "books"{
-    *isbn:int
+    *isbn:str
     --
     author:str
     title:str

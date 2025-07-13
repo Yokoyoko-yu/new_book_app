@@ -24,15 +24,18 @@ gem 'prism'
 # gem 'sqlite3', '~> 1.6.4'
 gem 'rack-cors' 
 gem "mysql2"
+gem "nokogiri"
 
-
+gem 'reline', '>= 0.5.13'  # 例として最新バージョンを指定
+gem 'composite_primary_keys'
 
 
 
 
 group :development, :test do
   gem 'rspec-rails', '~> 7.0.0'
-  gem "debug",   "1.7.1", platforms: %i[ mri mingw x64_mingw ]
+  # gem "debug",   "1.7.1", platforms: %i[ mri mingw x64_mingw ]
+  gem "debug","1.11.0"
   
 end
 

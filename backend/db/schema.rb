@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema[7.0].define(version: 2025_06_23_123452) do
   create_table "award_book_contents", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "isbn", null: false
+    t.string "isbn", null: false
     t.bigint "award_title_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_23_123452) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "books", primary_key: "isbn", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "books", primary_key: "isbn", id: :string, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "author", null: false
     t.string "title", null: false
     t.string "publisher", null: false
@@ -54,7 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_23_123452) do
 
   create_table "user_books", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.integer "isbn", null: false
+    t.string "isbn", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["isbn"], name: "fk_rails_29857ce198"

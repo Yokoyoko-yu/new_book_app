@@ -41,17 +41,25 @@ function CustomColumnMenu(props) {
 
 export const AddNewColumnMenuGrid=(props)=>{
   const [columns, setColumns] = React.useState([
-    // { field: 'id', headerName: 'ID', width: 90 },
     { field: 'times', headerName: '回', width: 200 },
     { field: 'title', headerName: 'タイトル', width: 300 },
     { field: 'author', headerName: '著者', width: 200 },
-    {field:'status',headerName:'状態',width:200}
+    {field:'status',headerName:'所持',width:200}
   ]);
 
   const [rows, setRows] = React.useState(props.data || []);
+  console.log("データの中身:",props.data)
   // const rows=props.data
+    useEffect(() => {
+    // IDがなければtitleとtimesを使って仮IDを生成
+    const processed = (props.data || []).map((row, index) => ({
+      ...row,
+      id: row.id ?? `${row.title}-${row.times}-${index}`,
+      status: row.has_book==1 ? '○':'×'
+    }));
+    setRows(processed);
+  }, [props.data]);
 
-  useEffect(()=>{setRows(props.data || [])},[props.data])
 
   return (
     <div style={{ height: 600, width: '100%' }}>

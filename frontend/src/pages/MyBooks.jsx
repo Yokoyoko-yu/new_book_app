@@ -7,14 +7,14 @@ export const MyBooks=()=>{
     const [books,setBooks]=useState([]);
     useEffect(()=>{getBooks()},[])
     const getBooks=async()=>{
-        const response=await fetch('http://127.0.0.1:3000/my_books',{
+        const response=await fetch('http://127.0.0.1:3000/user_books',{
             method:'GET',
             credentials:'include'
         })
         if (response.ok){
             const data=await response.json()
-            console.log(`書籍データ${JSON.stringify(data.books)}`)
-            setBooks(data.books)
+            console.log(`書籍データ${JSON.stringify(data["本の一覧"])}`)
+            setBooks(data["本の一覧"])
         }
         else{
             console.log('書籍の取得に失敗')

@@ -10,6 +10,7 @@ export const BasicButtons=(props)=> {
   const [imgState,SetimgState]=useState(false)
   const [bookinfo,Setbookinfo]=useState({})
   const {value}=props
+  
   const searchBook=async(str)=>{
     const isbn=str.replace(/-/g,'')
     console.log(`isbn:${isbn}`)
@@ -54,14 +55,14 @@ export const BasicButtons=(props)=> {
   }
 
   const add_book=async()=>{
-    const response=await fetch('http://127.0.0.1:3000/my_books',{
-      method:'Post',
-      credentials:'include',
+    const response = await fetch('http://127.0.0.1:3000/user_books', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',  // JSON形式で送信することを指定
       },
-      body:JSON.stringify({
-        my_book:bookinfo
+      credentials: 'include', // credentialsはheadersの外に記述
+      body: JSON.stringify({
+        isbn: bookinfo.isbn
       })
     })
     if(response.ok){

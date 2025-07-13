@@ -8,40 +8,53 @@
 ##これはwsl2上ファイルです
 require 'csv'
 
-LiteraryAward.create!(id:1,name:'芥川賞',total:171)
-LiteraryAward.create!(id:2,name:'三島由紀夫賞',total:37)
-LiteraryAward.create!(id:3,name:'野間文芸新人賞',total:46)
+Award.create!(id:1,name:'芥川賞',total:172)
+Award.create!(id:2,name:'三島由紀夫賞',total:37)
+Award.create!(id:3,name:'野間文芸新人賞',total:46)
 
 csv_file_path = Rails.root.join('db/akutagawa.csv')
 
 CSV.foreach(csv_file_path, headers: true) do |row|
-    # 各行のデータを取得し、データベースに保存
-    AwardBook.create!(
-    times: row['回'],
-    title: row['タイトル'],
-    author: row['著者'],
-    literary_award_id:1
+    award_title=AwardTitle.create!(
+        title:row['タイトル'],
+        author:row['著者']
     )
-  end
+    AwardGrant.create!(
+        award_id:1,
+        award_title_id:award_title.id,
+        times:row['回']
+    )
+    end
+
+
 
 mishima=Rails.root.join('db/mishima.csv')
 
-CSV.foreach(mishima,headers: true) do |award|
-    AwardBook.create!(
-        times: award['回数'],
-        title: award['タイトル'],
-        author: award['著者'],
-        literary_award_id:2
+CSV.foreach(mishima,headers: true) do |row|
+    award_title=AwardTitle.create!(
+    title:row['タイトル'],
+    author:row['著者']
     )
-end
-noma=Rails.root.join('db/noma.csv')
+    AwardGrant.create!(
+    award_id:2,
+    award_title_id:award_title.id,
+    times:row['回数']
+    )
+    end
 
-CSV.foreach(noma,headers: false) do |line|
-    # line=line.split(',')
-    AwardBook.create!(
-        times:line[0],
-        title:line[1],
-        author:line[2],
-        literary_award_id:3
+
+noma=Rails.root.join('db/noma.csv')
+CSV.foreach(noma,headers: false) do |row|
+    award_title=AwardTitle.create!(
+    title:row[1],
+    author:row[2]
     )
-end
+    AwardGrant.create!(
+    award_id:3,
+    award_title_id:award_title.id,
+    times:row[0]
+    )
+    end
+ 
+
+# end

@@ -4,6 +4,7 @@ class StaticPageController < ApplicationController
         render 'static_page/sign_in'
     end
     def home
-        puts "クッキーの中身#{cookies.inspect}"
+        render json: { message: "Hello from /home" }, layout: false
+        # puts "クッキーの中身#{cookies.inspect}"
     end
 end

@@ -6,8 +6,8 @@ module SessionsHelper
             value:token,
             httponly:true,
             expires:1.weeks.from_now,
-            same_site: :None,
-            secure: true
+            same_site: :none, # CSRF対策のため、SameSite属性を設定
+            secure: true # 本番のみsecure、開発はfalse
         }
         # puts "クッキーの送信#{cookies[:auth_token]}"
         # cookies[:auth_token]=token

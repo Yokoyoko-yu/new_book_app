@@ -53,16 +53,17 @@ export const Award=()=>{
     
        
         try {
-            const response = await fetch(`http://127.0.0.1:3000/check?id=${prize.id}`, {
+            const response = await fetch(`http://127.0.0.1:3000/award_grants/search?award_id=${prize.id}`, {
                 method: 'GET',
                 credentials: 'include'
             });
     
-            console.log("表データ", response);
+            console.log("表データ", response[0]);
     
             const data = await response.json();  // JSONデータを取得
-            setAwardsData(data.books);
-            console.log("表データ (JSON本体)", data.books);
+            console.log("aaa",data[0])
+            setAwardsData(data);
+            console.log("表データ (JSON本体)",data);
         } catch (error) {
             console.error("データの取得に失敗しました:", error);
         }
@@ -81,7 +82,7 @@ export const Award=()=>{
                 sx={{ width: 300 }}
                 onChange={handleAwardChange}
                 renderInput={(params) => <TextField {...params} label="prize" />}/>
-            <div>{JSON.stringify(prize)}</div>
+            {/* <div>{JSON.stringify(prize)}</div> */}
             
             <AddNewColumnMenuGrid data={awardsData}></AddNewColumnMenuGrid>
         </div>

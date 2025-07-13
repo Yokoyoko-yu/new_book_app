@@ -3,22 +3,32 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  get '/home',to:'static_page#home'
-  resources :users
-  root to:'static_page#sign_in'
+
+  #ユーザ
+  resources :users,only: [:create]
+
+  
+  #Userbook
+  resources :user_books,only: [:index, :create, :destroy]
+
+  #awards
+  resources :awards,only: [:index,:show]
+
+  #award_grants
+  get "/award_grants/search",to:'award_grants#search'
+
+  #sessions
   get '/login',to:'sessions#new'
   post '/login',to:'sessions#create'
   delete '/logout',to:'sessions#destroy'
-  resources :my_books
-  get 'awards',to:'literary_awards#show'
-  get 'check',to:'literary_awards#check'
-  get '/literary_awards/have_book/:id',to:'literary_awards#have_book',as:'have_book'
-  get '/literary_awards/read_book/:id',to:'literary_awards#read_book',as:'read_book'
-  get '/current_user',to:'sessions#user',defaults: { format: :json }
-  resources :my_books do
-    member do
-      get 'finish'
-    end
-  end
+
+  #award_titles
+  resources :award_titles,only: [:show]
+
+  get '/home',to:'static_page#home'
+  resources :users
+
+
+
 end
 

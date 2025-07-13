@@ -30,7 +30,7 @@ const fetchBookImage =  async(isbn) => {
   return `https://ndlsearch.ndl.go.jp/thumbnail/${replaceIsbn}.jpg`;
 };
 
-const paginationModel = { page: 0, pageSize: 5 };
+const paginationModel = { page: 0, pageSize: 20 };
 
 export default function DataTable(props) {
   const [bookRows, setBookRows] = useState([]);
