@@ -10,7 +10,7 @@ import {AddNewColumnMenuGrid} from "../components/AwardTable";
 
 export const Award=()=>{
     const [awards,setAwards]=useState([]);
-    const [prize,setPrize]=useState(null);
+    const [prize,setPrize]=useState({id:1});
     const [awardsData,setAwardsData]=useState([]);
     useEffect(()=>{getLiterary_awared()},[]);
     useEffect(()=>{getAwardList()},[prize]);

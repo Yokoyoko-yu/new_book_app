@@ -1,7 +1,7 @@
 class AwardBookContent < ApplicationRecord
     belongs_to :book,foreign_key: :isbn,primary_key: :isbn
     belongs_to :award_title
-    validates :isbn,presence: true
+    validates :isbn,presence: true,length:{is:13}
     validates :award_title_id,presence: true
     before_validation
     def normalize_isbn

@@ -11,6 +11,10 @@ class FetchBookData
             author=book_info["author"]
             title=book_info["title"]
             publisher=book_info["publisher"]
+            if isbn.to_s.gsub("-","").length!=13
+                isbn=book_info["isbn"]
+            end
+
             {
                 isbn:isbn,
                 author:author,

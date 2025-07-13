@@ -2,7 +2,7 @@
 class Book < ApplicationRecord
     has_many :user_books
     has_many :award_book_contents
-    validates :isbn,presence: true,uniqueness: true
+validates :isbn,presence: true,uniqueness: true,length:{is:13}
     validates :author,presence: true
     validates :title,presence: true
     validates :publisher,presence: true

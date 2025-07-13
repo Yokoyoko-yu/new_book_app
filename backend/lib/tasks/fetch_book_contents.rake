@@ -1,7 +1,6 @@
 namespace :award_book_contents do
     desc "APIからaward_titlesが入っている本のisbnを取得する"
     task fetch_book_data: :environment do
-        puts "aaaa"
         AwardTitle.find_each do |award|
             puts "タイトル：#{award.title},著者:#{award.author}"
             puts (award.title)

@@ -57,7 +57,7 @@ class FetchAwardBookData
                 book_info=FetchBookData.fetch(xml_isbn)
                 if !(book_info.nil?)
                     book=Book.find_or_create_by(isbn:book_info[:isbn],author:book_info[:author],title:book_info[:title],publisher:book_info[:publisher])
-                    record = AwardBookContent.find_or_initialize_by(isbn: xml_isbn, award_title_id: id)
+                    record = AwardBookContent.find_or_initialize_by(isbn: book_info[:isbn], award_title_id: id)
                     if record.new_record?
                         if record.save
                         puts "AwardBookContent 保存成功！"

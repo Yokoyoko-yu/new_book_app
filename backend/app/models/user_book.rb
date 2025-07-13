@@ -4,7 +4,7 @@ class UserBook < ApplicationRecord
     self.primary_keys = :user_id, :isbn
     belongs_to :user
     belongs_to :book,foreign_key: :isbn,primary_key: :isbn
-    validates :isbn,presence: true,length: {maximum:30,minimum:5}
+    validates :isbn,presence: true,length: {is:13}
     validates :user_id,presence: true
     before_validation :normalize_isbn
     def normalize_isbn
