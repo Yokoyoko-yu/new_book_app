@@ -1,11 +1,11 @@
 class FetchBookData
     #書籍情報を取得する
     def self.fetch(isbn)
-        isbn=isbn.gsub("-","")
+        isbn=isbn.to_s().gsub("-","")
         uri = URI("https://api.openbd.jp/v1/get?isbn=#{isbn}")
         res = Net::HTTP.get(uri)
         json = JSON.parse(res)
-        puts json
+        # puts json
         if !(json[0].nil?)
             book_info=json[0]["summary"]
             author=book_info["author"]

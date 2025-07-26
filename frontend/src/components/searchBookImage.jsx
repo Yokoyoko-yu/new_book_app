@@ -1,4 +1,4 @@
-export const searchBookImage=async(isbn)=>{
+export const searchBookImage=async({isbn})=>{
     const replace_isbn=isbn.replace(/-/g,'')
     console.log(`isbn:${replace_isbn}`)
     //画像の取得

@@ -12,7 +12,7 @@ import { useEffect,useState } from 'react';
 // import ButtonAppBar from './components/ButtonAppBar';
 import { Layout } from './components/Layout';
 import { UserProvider } from './components/Provider/userProbider';
-
+import {BookDetail} from './pages/BookDetail';
 
 export const App=()=>{
   // const fetchUserData=async()=> {
@@ -39,8 +39,8 @@ export const App=()=>{
     <Route path='/signup' element={<Signup/>}/>
       <Route path='/addbooks'  element={<UserProvider><Addbooks/></UserProvider>}/>
       <Route path='/mybooks' element={<UserProvider><MyBooks/></UserProvider>}/>
-
       <Route path='/award' element={<UserProvider><Award/></UserProvider>}/>
+    <Route path='/award_book_contents/:id' element={<BookDetail/>} />
     </Routes>
 
   </Router>
