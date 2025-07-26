@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_06_23_123452) do
+ActiveRecord::Schema[7.0].define(version: 2025_07_23_120014) do
   create_table "award_book_contents", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "isbn", null: false
     t.bigint "award_title_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["award_title_id"], name: "index_award_book_contents_on_award_title_id"
-    t.index ["isbn"], name: "fk_rails_7a42bacfcd"
+    t.index ["isbn", "award_title_id"], name: "index_award_book_contents_on_isbn_and_award_title_id", unique: true
   end
 
   create_table "award_grants", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -26,6 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_23_123452) do
     t.integer "times", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["award_id", "award_title_id"], name: "index_award_grants_on_award_id_and_award_title_id", unique: true
     t.index ["award_id"], name: "index_award_grants_on_award_id"
     t.index ["award_title_id"], name: "index_award_grants_on_award_title_id"
   end
