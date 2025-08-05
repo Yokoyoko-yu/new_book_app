@@ -4,12 +4,12 @@ import { useParams } from 'react-router-dom';
 import { useEffect,useState } from "react"; 
 import ActionAreaCard from "../components/BookCard";
 import Box from '@mui/material/Box';
-
+import { useMoveLoginPage } from "../hooks/useMoveLoginPage";
 
 export const BookDetail=()=>{
     const { id } = useParams(); // URLパラメータからidを取得
     const [awardData, setAwardData] = useState(null);
-
+    useMoveLoginPage();
     
     useEffect(()=>{
     fetch(`http://127.0.0.1:3000/award_titles/${id}`)

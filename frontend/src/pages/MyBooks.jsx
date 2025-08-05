@@ -2,8 +2,10 @@ import React from "react"
 // import ButtonAppBar from "../components/ButtonAppBar"
 import DataTable from "../components/Datatable"
 import {useState,useEffect} from "react"
+import { useMoveLoginPage } from "../hooks/useMoveLoginPage"
 
 export const MyBooks=()=>{
+    useMoveLoginPage();
     const [books,setBooks]=useState([]);
     useEffect(()=>{getBooks()},[])
     const getBooks=async()=>{

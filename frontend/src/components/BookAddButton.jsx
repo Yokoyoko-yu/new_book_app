@@ -2,6 +2,7 @@ import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import {useEffect,useState} from 'react';
+import { DeleteBookButton } from './DeleteBookButton';
 
 // ユーザが本の登録を行うボタン
 export const BookAddButton=({isbn})=>{
@@ -22,21 +23,6 @@ export const BookAddButton=({isbn})=>{
         }
     }
 
-    const deleteBook=async()=>{
-        try{
-            const response=await fetch(`http://127.0.0.1:3000/user_books/${isbn}`,{
-                method:'DELETE',
-                credentials:'include'
-            });
-            const data=await response.json();
-            console.log(data);
-            console.log(`いまのhasbook${hasBook}`)
-            setHasBook(false);
-        }catch (error){
-            console.error("通信エラー", error);
-        }
-    }
-    
 
     useEffect(() => {
     const checkBook = async () => {
@@ -55,12 +41,8 @@ export const BookAddButton=({isbn})=>{
     checkBook();
   }, []);
     return (
-            <Stack spacing={2} direction="row">
-            {/* <Button variant="text">Text</Button>
-            <Button variant="contained">Contained</Button>
-            <Button variant="outlined">Outlined</Button> */}
-            
-            {hasBook==true ? <Button variant="outlined" onClick={deleteBook}>所持済み</Button> : <Button variant="contained" onClick={registBook}>登録する</Button>}
+            <Stack spacing={2} direction="row" justifyContent="center"  sx={{ width: '100%' }} >
+            {hasBook==true ? <DeleteBookButton variant="outlined" isbn={isbn} onClick={()=>{setHasBook(false)}} sx={{ textAlign: "center" }}>削除する</DeleteBookButton> : <Button variant="contained" onClick={registBook}>登録する</Button>}
             </Stack>
             
         );

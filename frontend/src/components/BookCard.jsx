@@ -26,7 +26,7 @@ export const BookCard=({isbn,author,title,publisher})=>{
                 }}
         />
         {/* 本の情報 */}
-        <CardContent>
+        <CardContent sx={{ textAlign: "center" }}>
           <Typography gutterBottom variant="h6" component="div">
             {title}
           </Typography>
@@ -39,9 +39,10 @@ export const BookCard=({isbn,author,title,publisher})=>{
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
             {isbn}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            <BookAddButton isbn={isbn} />
-          </Typography>
+          {/* <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            <BookAddButton isbn={isbn} sx={{ textAlign: "center" }} />
+          </Typography> */}
+          <BookAddButton isbn={isbn} />
         </CardContent>
       </CardActionArea>
     </Card>

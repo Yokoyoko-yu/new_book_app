@@ -31,12 +31,12 @@ class SessionsController < ApplicationController
     def user
         Rails.logger.info "Cookies: #{cookies.inspect}-----"
         if logged_in?
-            render json:{user:current_user}
+            render json:{user_name:current_user}
             puts '成功'
         else
             Rails.logger.info('だめだ失敗')
             # render json: { error: "Not logged in" }, status: :unauthorized
-            render json:{user_name:"null"}
+            render json:{user_name:"null"},status: :unauthorized
         end
     end
 end

@@ -5,12 +5,36 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useCallback } from 'react';
+import { DeleteBookButton } from './DeleteBookButton';
+
+
+export default function DataTable(props) {
+  const [bookRows, setBookRows] = useState([]);
+  const [loadingState, setLoadingState] = useState(true);
+
+
+
+const handleDelete = useCallback((isbn) => {
+  const deletedBook=bookRows.filter((value)=>{return value.isbn!==isbn}).map((row,index)=>({
+        id:index+1,
+        image:row.image,
+        title:row.title,
+        author:row.author,
+        status:row.status,
+        isbn:row.isbn
+    }))
+
+    setBookRows(deletedBook);
+  }
+  )
+
+
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 140 },
   {
-    field: 'isbn',
+    field: 'image',
     headerName: 'Image',
     width: 250,
     renderCell: (params) => (
@@ -21,8 +45,13 @@ const columns = [
       />
     ),
   },
-  { field: 'title', headerName: 'Title', width: 250 },
-  { field: 'author', headerName: 'Author', width: 250 },
+  { field: 'title', headerName: 'Title', width: 200 },
+  { field: 'author', headerName: 'Author', width: 200 },
+  {field:'isbn',headerName:'Delete',width:200,
+    renderCell: (params)=>(
+      <DeleteBookButton variant="contained" isbn={params.value} onClick={() => handleDelete(params.value)}>削除する</DeleteBookButton>
+    )
+  }
 ];
 
 const fetchBookImage =  async(isbn) => {
@@ -32,9 +61,6 @@ const fetchBookImage =  async(isbn) => {
 
 const paginationModel = { page: 0, pageSize: 20 };
 
-export default function DataTable(props) {
-  const [bookRows, setBookRows] = useState([]);
-  const [loadingState, setLoadingState] = useState(true);
 
   useEffect(() => {
     const prepareRows = async () => {
@@ -46,16 +72,19 @@ export default function DataTable(props) {
       const rows = await Promise.all(
         props.props.map(async (item, index) => {
           const imageUrl = await fetchBookImage(item.isbn);
+          console.log(item.author)
           return {
             id: index + 1,
-            isbn: imageUrl,
+            image: imageUrl,
             title: item.title,
             author: item.author,
             status: item.status || 0,
+            isbn: item.isbn
           };
         })
       );
       setBookRows(rows);
+      console.log(rows);
       setLoadingState(false);
     };
 

@@ -10,32 +10,25 @@ import { useState,useEffect,useContext } from 'react';
 import BasicMenu from './Menu';
 import { ContactlessOutlined, Login } from '@mui/icons-material';
 import { userContext } from './Provider/userProbider';
+import { gray } from '../shared-theme/themePrimitives';
 
 
 
 
-export const  ButtonAppBar=()=> {
-  const user=useContext(userContext)
+export const  TopBar=()=> {
+  console.log('topbar')
+  const {user,loading}=useContext(userContext)
   console.log(`userの中身:${JSON.stringify(user)}`)
   return (
-    <div>
+    <div >
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ backgroundColor: "black" }}>
         <Toolbar>
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton> */}
           <BasicMenu/>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            Book
           </Typography>
-          <Button color="inherit">{user? user.name: "Login"}</Button>
+          <Button color="inherit">{user? user: "Login"}</Button>
         </Toolbar>
       </AppBar>
     </Box>

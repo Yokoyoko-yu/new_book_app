@@ -1,10 +1,10 @@
-import { ButtonAppBar } from "./ButtonAppBar";
+import { TopBar } from "./TopBar";
 import React from "react";
 
 export const Layout=()=>{
     return(
         <div>
-            <ButtonAppBar></ButtonAppBar>
+            <TopBar></TopBar>
         </div>
     )
 }
